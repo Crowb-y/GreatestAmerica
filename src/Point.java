@@ -23,4 +23,9 @@ public final class Point
         result = result * 31 + y;
         return result;
     }
+
+    public boolean adjacent(Point other) {
+        return (this.x == other.x && Math.abs(this.y - other.y) == 1) || (this.y == other.y
+                && Math.abs(this.x - other.x) == 1);
+    }
 }
