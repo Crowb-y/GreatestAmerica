@@ -384,12 +384,12 @@ public final class Entity
     public Point nextPositionMiner(
             WorldModel world, Point destPos)
     {
-        int horiz = Integer.signum(destPos.x - position.x);
-        Point newPos = new Point(position.x + horiz, position.y);
+        int horiz = Integer.signum(destPos.getX() - position.getX());
+        Point newPos = new Point(position.getX() + horiz, position.getY());
 
         if (horiz == 0 || world.isOccupied(newPos)) {
-            int vert = Integer.signum(destPos.y - position.y);
-            newPos = new Point(position.x, position.y + vert);
+            int vert = Integer.signum(destPos.getY() - position.getY());
+            newPos = new Point(position.getX(), position.getY() + vert);
 
             if (vert == 0 || world.isOccupied(newPos)) {
                 newPos = position;
@@ -402,16 +402,16 @@ public final class Entity
     public Point nextPositionOreBlob(
             WorldModel world, Point destPos)
     {
-        int horiz = Integer.signum(destPos.x - position.x);
-        Point newPos = new Point(position.x + horiz, position.y);
+        int horiz = Integer.signum(destPos.getX() - position.getX());
+        Point newPos = new Point(position.getX() + horiz, position.getY());
 
         Optional<Entity> occupant = world.getOccupant(newPos);
 
         if (horiz == 0 || (occupant.isPresent() && !(occupant.get().kind
                 == EntityKind.ORE)))
         {
-            int vert = Integer.signum(destPos.y - position.y);
-            newPos = new Point(position.x, position.y + vert);
+            int vert = Integer.signum(destPos.getY() - position.getY());
+            newPos = new Point(position.getX(), position.getY() + vert);
             occupant = world.getOccupant(newPos);
 
             if (vert == 0 || (occupant.isPresent() && !(occupant.get().kind

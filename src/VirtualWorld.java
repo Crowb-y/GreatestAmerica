@@ -4,8 +4,6 @@ import java.util.Scanner;
 import processing.core.*;
 
 
-// push test
-
 public final class VirtualWorld extends PApplet
 {
     public static final int TIMER_ACTION_PERIOD = 100;
