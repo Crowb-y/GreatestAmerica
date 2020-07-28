@@ -6,8 +6,8 @@ import java.util.PriorityQueue;
 
 public final class EventScheduler
 {
-    protected final PriorityQueue<Event> eventQueue;
-    protected final Map<Entity, List<Event>> pendingEvents;
+    private final PriorityQueue<Event> eventQueue;
+    private final Map<Entity, List<Event>> pendingEvents;
     private final double timeScale;
 
     public EventScheduler(double timeScale) {

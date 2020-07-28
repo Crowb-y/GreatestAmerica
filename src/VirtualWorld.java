@@ -3,39 +3,36 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import processing.core.*;
 
-
-// push test
-
 public final class VirtualWorld extends PApplet
 {
-    public static final int TIMER_ACTION_PERIOD = 100;
+    private static final int TIMER_ACTION_PERIOD = 100;
 
-    public static final int VIEW_WIDTH = 640;
-    public static final int VIEW_HEIGHT = 480;
-    public static final int TILE_WIDTH = 32;
-    public static final int TILE_HEIGHT = 32;
-    public static final int WORLD_WIDTH_SCALE = 2;
-    public static final int WORLD_HEIGHT_SCALE = 2;
+    private static final int VIEW_WIDTH = 640;
+    private static final int VIEW_HEIGHT = 480;
+    private static final int TILE_WIDTH = 32;
+    private static final int TILE_HEIGHT = 32;
+    private static final int WORLD_WIDTH_SCALE = 2;
+    private static final int WORLD_HEIGHT_SCALE = 2;
 
-    public static final int VIEW_COLS = VIEW_WIDTH / TILE_WIDTH;
-    public static final int VIEW_ROWS = VIEW_HEIGHT / TILE_HEIGHT;
-    public static final int WORLD_COLS = VIEW_COLS * WORLD_WIDTH_SCALE;
-    public static final int WORLD_ROWS = VIEW_ROWS * WORLD_HEIGHT_SCALE;
+    private static final int VIEW_COLS = VIEW_WIDTH / TILE_WIDTH;
+    private static final int VIEW_ROWS = VIEW_HEIGHT / TILE_HEIGHT;
+    private static final int WORLD_COLS = VIEW_COLS * WORLD_WIDTH_SCALE;
+    private static final int WORLD_ROWS = VIEW_ROWS * WORLD_HEIGHT_SCALE;
 
-    public static final String IMAGE_LIST_FILE_NAME = "imagelist";
-    public static final String DEFAULT_IMAGE_NAME = "background_default";
-    public static final int DEFAULT_IMAGE_COLOR = 0x808080;
+    private static final String IMAGE_LIST_FILE_NAME = "imagelist";
+    private static final String DEFAULT_IMAGE_NAME = "background_default";
+    private static final int DEFAULT_IMAGE_COLOR = 0x808080;
 
-    public static final String LOAD_FILE_NAME = "world.sav";
+    private static final String LOAD_FILE_NAME = "world.sav";
 
-    public static final String FAST_FLAG = "-fast";
-    public static final String FASTER_FLAG = "-faster";
-    public static final String FASTEST_FLAG = "-fastest";
-    public static final double FAST_SCALE = 0.5;
-    public static final double FASTER_SCALE = 0.25;
-    public static final double FASTEST_SCALE = 0.10;
+    private static final String FAST_FLAG = "-fast";
+    private static final String FASTER_FLAG = "-faster";
+    private static final String FASTEST_FLAG = "-fastest";
+    private static final double FAST_SCALE = 0.5;
+    private static final double FASTER_SCALE = 0.25;
+    private static final double FASTEST_SCALE = 0.10;
 
-    public static double timeScale = 1.0;
+    private static double timeScale = 1.0;
 
     private ImageStore imageStore;
     private WorldModel world;
@@ -150,7 +147,9 @@ public final class VirtualWorld extends PApplet
             WorldModel world, EventScheduler scheduler, ImageStore imageStore)
     {
         for (Entity entity : world.getEntities()) {
-            entity.scheduleActions(scheduler, world, imageStore);
+            if (entity instanceof Active) {
+                ((Active) entity).scheduleActions(scheduler, world, imageStore);
+            }
         }
     }
 

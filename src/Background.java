@@ -16,4 +16,8 @@ public final class Background
     public String getId() {return id;}
     public List<PImage> getImages() {return images;}
     public int getImageIndex() {return imageIndex;}
+
+    public PImage getCurrentImage() {
+        return images.get(imageIndex);
+    }
 }
