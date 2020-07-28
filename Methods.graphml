@@ -132,8 +132,8 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
-            <y:AttributeLabel xml:space="preserve">+x: int
-+y: int</y:AttributeLabel>
+            <y:AttributeLabel xml:space="preserve">-x: int
+-y: int</y:AttributeLabel>
             <y:MethodLabel xml:space="preserve">+toString(): String
 +equals(): boolean
 +adjacent(): boolean                           </y:MethodLabel>

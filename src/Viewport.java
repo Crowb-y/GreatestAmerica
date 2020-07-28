@@ -21,8 +21,8 @@ public final class Viewport
     }
 
     public boolean contains(Point p) {
-        return p.y >= row && p.y < row + numRows
-                && p.x >= col && p.x < col + numCols;
+        return p.getY() >= row && p.getY() < row + numRows
+                && p.getX() >= col && p.getX() < col + numCols;
     }
 
     public Point viewportToWorld(int col, int row) {
