@@ -2,7 +2,7 @@ import processing.core.PImage;
 
 import java.util.List;
 
-public class Blacksmith implements Entity {
+public class Blacksmith implements Passive {
 
     private final String id;
     private Point position;

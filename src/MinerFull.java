@@ -120,12 +120,12 @@ public class MinerFull implements Miner {
     }
 
     public Point nextPositionMiner(WorldModel world, Point destPos) {
-        int horiz = Integer.signum(destPos.x - position.x);
-        Point newPos = new Point(position.x + horiz, position.y);
+        int horiz = Integer.signum(destPos.getX() - position.getX());
+        Point newPos = new Point(position.getX() + horiz, position.getY());
 
         if (horiz == 0 || world.isOccupied(newPos)) {
-            int vert = Integer.signum(destPos.y - position.y);
-            newPos = new Point(position.x, position.y + vert);
+            int vert = Integer.signum(destPos.getY() - position.getY());
+            newPos = new Point(position.getX(), position.getY() + vert);
 
             if (vert == 0 || world.isOccupied(newPos)) {
                 newPos = position;
