@@ -1,13 +1,39 @@
 import processing.core.PImage;
 
-public interface Entity {
-    Point getPosition();
+import java.util.List;
 
-    void nextImage();
+abstract public class Entity {
 
-    Action createAnimationAction(int repeatCount);
+    private final String id;
+    private Point position;
+    private final List<PImage> images;
+    private int imageIndex;
 
-    PImage getCurrentImage();
+    public Entity(String id, Point position, List<PImage> images, int index) {
+        this.id = id;
+        this.images = images;
+        this.position = position;
+        this.imageIndex = index;
+    }
 
-    void setPosition(Point pos);
+    protected Point getPosition() {
+        return position;
+    }
+
+    protected void setPosition(Point position) {
+        this.position = position;
+    }
+
+    protected void setImageIndex(int index) {this.imageIndex = index; }
+
+    protected int getImageIndex() { return this.imageIndex; }
+
+    protected List<PImage> getImages() { return images; }
+
+    protected String getId() { return this.id; }
+
+    protected PImage getCurrentImage() {
+        return images.get(imageIndex);
+    }
+
 }

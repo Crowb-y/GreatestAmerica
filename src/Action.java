@@ -1,4 +1,14 @@
-public interface Action
+abstract public class Action
 {
-    void executeAction(EventScheduler scheduler);
+    private final Entity entity;
+
+    public Action(Entity entity) {
+        this.entity = entity;
+    }
+
+    abstract void executeAction(EventScheduler scheduler);
+
+    protected Entity getEntity() {
+        return entity;
+    }
 }

@@ -4,105 +4,46 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class OreBlob implements Animated {
+public class OreBlob extends AnimatedEntity {
 
     private static final String BLOB_KEY = "blob";
     private static final String BLOB_ID_SUFFIX = " -- blob";
+    private static final String QUAKE_KEY = "quake";
     private static final int BLOB_PERIOD_SCALE = 4;
     private static final int BLOB_ANIMATION_MIN = 50;
     private static final int BLOB_ANIMATION_MAX = 150;
 
-    private final String id;
-    private Point position;
-    private List<PImage> images;
-    private int imageIndex;
-    private final int actionPeriod;
-    private final int animationPeriod;
+    private List<PImage> quakeImages;
 
-
-    public OreBlob(String id, Point position, int imageIndex, int actionPeriod, ImageStore imageStore) {
-        this.id = id + BLOB_ID_SUFFIX;
-        this.position = position;
-        this.imageIndex = imageIndex;
-        this.actionPeriod = actionPeriod / BLOB_PERIOD_SCALE;
-        this.animationPeriod = BLOB_ANIMATION_MIN + new Random().nextInt(
-                BLOB_ANIMATION_MAX
-                        - BLOB_ANIMATION_MIN);
-        this.images = imageStore.getImageList(BLOB_KEY);
+    public OreBlob(String id, Point position, List<PImage> images, int index,
+                   int actionPeriod, int animationPeriod, List<PImage> quakeImages) {
+        super(id, position, images, index, actionPeriod, animationPeriod);
+        this.quakeImages = quakeImages;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public Point getPosition() {
-        return position;
-    }
-
-    @Override
-    public void nextImage() {
-        imageIndex = (imageIndex + 1) % images.size();
-    }
-
-    @Override
-    public Action createAnimationAction(int repeatCount) {
-        return new Animation(this, repeatCount);
-    }
-
-    @Override
-    public PImage getCurrentImage() {
-        return images.get(imageIndex);
-    }
-
-    public void setPosition(Point position) {
-        this.position = position;
-    }
-
-    public List<PImage> getImages() {
-        return images;
-    }
-
-    public void setImages(List<PImage> images) {
-        this.images = images;
-    }
-
-    public int getImageIndex() {
-        return imageIndex;
-    }
-
-    public void setImageIndex(int imageIndex) {
-        this.imageIndex = imageIndex;
-    }
-
-    @Override
-    public int getAnimationPeriod() {
-        return imageIndex;
-    }
-
-    @Override
-    public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore) {
-        scheduler.scheduleEvent(this,
-                createActivityAction(world, imageStore),
-                this.actionPeriod);
-        scheduler.scheduleEvent(this,
-                createAnimationAction(0),
-                getAnimationPeriod());
+    public static OreBlob createOreBlob(String id, Point position, int imageIndex, int actionPeriod, ImageStore imageStore) {
+        return new OreBlob(
+                id + BLOB_ID_SUFFIX, position,
+                imageStore.getImageList(BLOB_KEY), imageIndex,
+                actionPeriod / BLOB_PERIOD_SCALE,
+                BLOB_ANIMATION_MIN + new Random().nextInt(
+                BLOB_ANIMATION_MAX - BLOB_ANIMATION_MIN), imageStore.getImageList(QUAKE_KEY)
+                );
     }
 
     @Override
     public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
         Optional<Entity> blobTarget =
-                world.findNearest(position, Vein.class);
-        long nextPeriod = actionPeriod;
+                world.findNearest(super.getPosition(), Vein.class);
+        long nextPeriod = super.getActionPeriod();
 
         if (blobTarget.isPresent()) {
             Point tgtPos = blobTarget.get().getPosition();
 
-            if (moveToOreBlob( world, blobTarget.get(), scheduler)) {
-                Quake quake = new Quake(blobTarget.get().getPosition(), images);
+            if (moveToOreBlob(world, blobTarget.get(), scheduler)) {
+                Quake quake = new Quake(tgtPos, quakeImages);
                 world.addEntity(quake);
-                nextPeriod += actionPeriod;
+                nextPeriod += super.getActionPeriod();
                 quake.scheduleActions(scheduler, world, imageStore);
             }
         }
@@ -112,19 +53,12 @@ public class OreBlob implements Animated {
                 nextPeriod);
     }
 
-    @Override
-    public Action createActivityAction(
-            WorldModel world, ImageStore imageStore)
-    {
-        return new Activity (this, world, imageStore, 0);
-    }
-
     public boolean moveToOreBlob(
             WorldModel world,
             Entity target,
             EventScheduler scheduler)
     {
-        if (position.adjacent(target.getPosition())) {
+        if (super.getPosition().adjacent(target.getPosition())) {
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
             return true;
@@ -132,7 +66,7 @@ public class OreBlob implements Animated {
         else {
             Point nextPos = nextPositionOreBlob(world, target.getPosition());
 
-            if (!position.equals(nextPos)) {
+            if (!super.getPosition().equals(nextPos)) {
                 Optional<Entity> occupant = world.getOccupant(nextPos);
                 if (occupant.isPresent()) {
                     scheduler.unscheduleAllEvents(occupant.get());
@@ -147,22 +81,22 @@ public class OreBlob implements Animated {
     public Point nextPositionOreBlob(
             WorldModel world, Point destPos)
     {
-        int horiz = Integer.signum(destPos.getX() - position.getX());
-        Point newPos = new Point(position.getX() + horiz, position.getY());
+        int horiz = Integer.signum(destPos.getX() - super.getPosition().getX());
+        Point newPos = new Point(super.getPosition().getX() + horiz, super.getPosition().getY());
 
         Optional<Entity> occupant = world.getOccupant(newPos);
 
         if (horiz == 0 || (occupant.isPresent() && !(occupant.get().getClass()
                 == Ore.class)))
         {
-            int vert = Integer.signum(destPos.getY() - position.getY());
-            newPos = new Point(position.getX(), position.getY() + vert);
+            int vert = Integer.signum(destPos.getY() - super.getPosition().getY());
+            newPos = new Point(super.getPosition().getX(), super.getPosition().getY() + vert);
             occupant = world.getOccupant(newPos);
 
             if (vert == 0 || (occupant.isPresent() && !(occupant.get().getClass()
                     == Ore.class)))
             {
-                newPos = position;
+                newPos = super.getPosition();
             }
         }
 

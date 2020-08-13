@@ -111,8 +111,8 @@ public final class WorldModel
                     Integer.parseInt(properties[MINER_ROW]));
             MinerNotFull entity = new MinerNotFull(properties[MINER_ID], pt, imageStore.getImageList(MINER_KEY),
                     Integer.parseInt(properties[MINER_LIMIT]),
-                    Integer.parseInt(properties[MINER_ACTION_PERIOD]), Integer.parseInt(
-                            properties[MINER_ANIMATION_PERIOD]));
+                    Integer.parseInt(properties[MINER_ACTION_PERIOD]),
+                    Integer.parseInt(properties[MINER_ANIMATION_PERIOD]));
             tryAddEntity(entity);
         }
 
@@ -126,7 +126,7 @@ public final class WorldModel
             Point pt = new Point(Integer.parseInt(properties[OBSTACLE_COL]),
                     Integer.parseInt(properties[OBSTACLE_ROW]));
             Obstacle entity = new Obstacle(properties[OBSTACLE_ID], pt,
-                    imageStore.getImageList(OBSTACLE_KEY));
+                    imageStore.getImageList(OBSTACLE_KEY), 0);
             tryAddEntity(entity);
         }
 
@@ -139,7 +139,7 @@ public final class WorldModel
         if (properties.length == ORE_NUM_PROPERTIES) {
             Point pt = new Point(Integer.parseInt(properties[ORE_COL]),
                     Integer.parseInt(properties[ORE_ROW]));
-            Ore entity = new Ore(properties[ORE_ID], pt, imageStore, Integer.parseInt(
+            Ore entity = new Ore(properties[ORE_ID], pt, imageStore.getImageList(ORE_KEY), Integer.parseInt(
                     properties[ORE_ACTION_PERIOD]));
             tryAddEntity(entity);
         }
