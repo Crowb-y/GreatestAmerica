@@ -41,7 +41,7 @@ public class OreBlob extends AnimatedEntity {
             Point tgtPos = blobTarget.get().getPosition();
 
             if (moveToOreBlob(world, blobTarget.get(), scheduler)) {
-                Quake quake = new Quake(tgtPos, quakeImages);
+                Quake quake = Quake.createQuake(tgtPos, quakeImages);
                 world.addEntity(quake);
                 nextPeriod += super.getActionPeriod();
                 quake.scheduleActions(scheduler, world, imageStore);

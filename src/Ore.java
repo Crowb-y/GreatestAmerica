@@ -4,11 +4,10 @@ import java.util.List;
 
 public class Ore extends ActiveEntity {
 
-    private static final String ORE_KEY = "ore";
     private static final String ORE_ID_PREFIX = "ore -- ";
 
-    public Ore(String id, Point position, List<PImage> images, int actionPeriod) {
-        super(id, position, images, 0, actionPeriod);
+    public Ore(String id, Point position, List<PImage> images, int index, int actionPeriod) {
+        super(id, position, images, index, actionPeriod);
     }
 
     @Override
@@ -25,4 +24,7 @@ public class Ore extends ActiveEntity {
         blob.scheduleActions(scheduler, world, imageStore);
     }
 
+    public static Ore createOre(String id, Point pos, List<PImage> images, int actionPeriod) {
+        return new Ore(ORE_ID_PREFIX + id, pos, images, 0, actionPeriod);
+    }
 }

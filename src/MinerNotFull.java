@@ -7,10 +7,11 @@ public class MinerNotFull extends Miner {
 
     private int resourceCount;
 
-    public MinerNotFull(String id, Point position, List<PImage> images,
-                        int resourceLimit, int actionPeriod, int animationPeriod) {
-        super(id, position, images, 0, actionPeriod, animationPeriod, resourceLimit);
-        this.resourceCount = 0;
+    public MinerNotFull(String id, Point position, List<PImage> images, int index,
+                        int actionPeriod, int animationPeriod, int resourceLimit,
+                        int resourceCount) {
+        super(id, position, images, index, actionPeriod, animationPeriod, resourceLimit);
+        this.resourceCount = resourceCount;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class MinerNotFull extends Miner {
             ImageStore imageStore)
     {
         if (this.resourceCount >= super.getResourceLimit()) {
-            MinerFull miner = new MinerFull(super.getId(), super.getPosition(), super.getImages(),
+            MinerFull miner = MinerFull.createMinerFull(super.getId(), super.getPosition(), super.getImages(),
                     super.getImageIndex(), super.getResourceLimit(), super.getActionPeriod(),
                     super.getAnimationPeriod());
 
@@ -74,5 +75,12 @@ public class MinerNotFull extends Miner {
             }
             return false;
         }
+    }
+
+    public static MinerNotFull createMinerNotFull(String id, Point pos, List<PImage> images,
+                                                  int actionPeriod, int animationPeriod,
+                                                  int resourceLimit) {
+        return new MinerNotFull(id, pos, images,0, actionPeriod,
+                animationPeriod, resourceLimit, 0);
     }
 }

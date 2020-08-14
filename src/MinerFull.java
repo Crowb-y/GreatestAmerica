@@ -33,9 +33,9 @@ public class MinerFull extends Miner {
             WorldModel world,
             EventScheduler scheduler,
             ImageStore imageStore) {
-        MinerNotFull miner = new MinerNotFull(super.getId(), super.getPosition(),
-                super.getImages(), super.getResourceLimit(), super.getActionPeriod(),
-                super.getAnimationPeriod());
+        MinerNotFull miner = MinerNotFull.createMinerNotFull(super.getId(), super.getPosition(),
+                super.getImages(), super.getActionPeriod(),
+                super.getAnimationPeriod(), super.getResourceLimit());
 
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
@@ -63,5 +63,11 @@ public class MinerFull extends Miner {
             }
             return false;
         }
+    }
+
+    public static MinerFull createMinerFull(String id, Point pos, List<PImage> images,
+                                            int index, int actionPeriod,
+                                            int animationPeriod, int resourceLimit) {
+        return new MinerFull(id, pos, images, index, actionPeriod, animationPeriod, resourceLimit);
     }
 }

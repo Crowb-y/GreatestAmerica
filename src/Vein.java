@@ -11,8 +11,8 @@ public class Vein extends ActiveEntity {
     private static final int ORE_CORRUPT_MAX = 30000;
     private static final String ORE_KEY = "ore";
 
-    public Vein(String id, Point position, List<PImage> images, int imageIndex, int actionPeriod) {
-        super(id, position, images, imageIndex, actionPeriod);
+    public Vein(String id, Point position, List<PImage> images, int index, int actionPeriod) {
+        super(id, position, images, index, actionPeriod);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Vein extends ActiveEntity {
         Optional<Point> openPt = world.findOpenAround(super.getPosition());
 
         if (openPt.isPresent()) {
-            Ore ore = new Ore(super.getId(), openPt.get(), imageStore.getImageList(ORE_KEY), (ORE_CORRUPT_MIN + new Random().nextInt(
+            Ore ore = Ore.createOre(super.getId(), openPt.get(), imageStore.getImageList(ORE_KEY), (ORE_CORRUPT_MIN + new Random().nextInt(
                     ORE_CORRUPT_MAX - ORE_CORRUPT_MIN)));
             world.addEntity(ore);
             ore.scheduleActions(scheduler, world, imageStore);
@@ -30,6 +30,10 @@ public class Vein extends ActiveEntity {
         scheduler.scheduleEvent(this,
                 createActivityAction(world, imageStore),
                 super.getActionPeriod());
+    }
+
+    public static Vein createVein(String id, Point pos, List<PImage> images, int actionPeriod) {
+        return new Vein(id, pos, images, 0, actionPeriod);
     }
 
 }
