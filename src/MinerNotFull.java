@@ -3,15 +3,21 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class MinerNotFull extends Miner {
+public class MinerNotFull extends MovingEntity {
 
     private int resourceCount;
+    private final int resourceLimit;
 
     public MinerNotFull(String id, Point position, List<PImage> images, int index,
                         int actionPeriod, int animationPeriod, int resourceLimit,
                         int resourceCount) {
-        super(id, position, images, index, actionPeriod, animationPeriod, resourceLimit);
+        super(id, position, images, index, actionPeriod, animationPeriod);
         this.resourceCount = resourceCount;
+        this.resourceLimit = resourceLimit;
+    }
+
+    public int getResourceLimit() {
+        return resourceLimit;
     }
 
     @Override
@@ -19,7 +25,7 @@ public class MinerNotFull extends Miner {
         Optional<Entity> notFullTarget =
                 world.findNearest(super.getPosition(), Ore.class);
 
-        if (notFullTarget.isEmpty() || !moveToNotFull( world,
+        if (notFullTarget.isEmpty() || !moveTo( world,
                 notFullTarget.get(),
                 scheduler)
                 || !transformNotFull(world, scheduler, imageStore))
@@ -34,9 +40,9 @@ public class MinerNotFull extends Miner {
             EventScheduler scheduler,
             ImageStore imageStore)
     {
-        if (this.resourceCount >= super.getResourceLimit()) {
+        if (this.resourceCount >= getResourceLimit()) {
             MinerFull miner = MinerFull.createMinerFull(super.getId(), super.getPosition(), super.getImages(),
-                    super.getImageIndex(), super.getResourceLimit(), super.getActionPeriod(),
+                    super.getImageIndex(), getResourceLimit(), super.getActionPeriod(),
                     super.getAnimationPeriod());
 
             world.removeEntity(this);
@@ -50,7 +56,9 @@ public class MinerNotFull extends Miner {
 
         return false;
     }
-    public boolean moveToNotFull(
+
+    @Override
+    public boolean moveTo(
             WorldModel world,
             Entity target,
             EventScheduler scheduler)
@@ -63,7 +71,7 @@ public class MinerNotFull extends Miner {
             return true;
         }
         else {
-            Point nextPos = nextPositionMiner(world, target.getPosition());
+            Point nextPos = nextPosition(world, target.getPosition());
 
             if (!super.getPosition().equals(nextPos)) {
                 Optional<Entity> occupant = world.getOccupant(nextPos);
@@ -82,5 +90,20 @@ public class MinerNotFull extends Miner {
                                                   int resourceLimit) {
         return new MinerNotFull(id, pos, images,0, actionPeriod,
                 animationPeriod, resourceLimit, 0);
+    }
+    @Override
+    public Point nextPosition(WorldModel world, Point destPos) {
+        int horiz = Integer.signum(destPos.getX() - super.getPosition().getX());
+        Point newPos = new Point(super.getPosition().getX() + horiz, super.getPosition().getY());
+
+        if (horiz == 0 || world.isOccupied(newPos)) {
+            int vert = Integer.signum(destPos.getY() - super.getPosition().getY());
+            newPos = new Point(super.getPosition().getX(), super.getPosition().getY() + vert);
+
+            if (vert == 0 || world.isOccupied(newPos)) {
+                newPos = super.getPosition();
+            }
+        }
+        return newPos;
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class OreBlob extends AnimatedEntity {
+public class OreBlob extends MovingEntity {
 
     private static final String BLOB_KEY = "blob";
     private static final String BLOB_ID_SUFFIX = " -- blob";
@@ -40,7 +40,7 @@ public class OreBlob extends AnimatedEntity {
         if (blobTarget.isPresent()) {
             Point tgtPos = blobTarget.get().getPosition();
 
-            if (moveToOreBlob(world, blobTarget.get(), scheduler)) {
+            if (moveTo(world, blobTarget.get(), scheduler)) {
                 Quake quake = Quake.createQuake(tgtPos, quakeImages);
                 world.addEntity(quake);
                 nextPeriod += super.getActionPeriod();
@@ -53,7 +53,8 @@ public class OreBlob extends AnimatedEntity {
                 nextPeriod);
     }
 
-    public boolean moveToOreBlob(
+    @Override
+    public boolean moveTo(
             WorldModel world,
             Entity target,
             EventScheduler scheduler)
@@ -64,7 +65,7 @@ public class OreBlob extends AnimatedEntity {
             return true;
         }
         else {
-            Point nextPos = nextPositionOreBlob(world, target.getPosition());
+            Point nextPos = nextPosition(world, target.getPosition());
 
             if (!super.getPosition().equals(nextPos)) {
                 Optional<Entity> occupant = world.getOccupant(nextPos);
@@ -78,7 +79,8 @@ public class OreBlob extends AnimatedEntity {
         }
     }
 
-    public Point nextPositionOreBlob(
+    @Override
+    public Point nextPosition(
             WorldModel world, Point destPos)
     {
         int horiz = Integer.signum(destPos.getX() - super.getPosition().getX());
