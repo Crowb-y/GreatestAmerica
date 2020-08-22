@@ -82,6 +82,7 @@ public final class VirtualWorld extends PApplet
     }
 
     public Point mousePosition(){
+
         int x_num = mouseX / 32;
         int y_num = mouseY / 32;
         return new Point(x_num,y_num);

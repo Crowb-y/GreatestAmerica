@@ -21,7 +21,8 @@ public class Trump extends MovingEntity {
             EventScheduler scheduler) {
         if (super.getPosition().adjacent(target.getPosition())) {
             return true;
-        } else {
+        }
+        else {
             Point nextPos = nextPosition(world, target.getPosition());
 
             if (!super.getPosition().equals(nextPos)) {
@@ -52,10 +53,8 @@ public class Trump extends MovingEntity {
     }
 
     @Override
-    public void executeActivity(
-            WorldModel world,
-            ImageStore imageStore,
-            EventScheduler scheduler) {
+    public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler)
+    {
         Optional<Entity> trumpTarget =
                 world.nearestMiner(super.getPosition());
 
@@ -69,5 +68,6 @@ public class Trump extends MovingEntity {
                     createActivityAction(world, imageStore),
                     super.getActionPeriod());
         }
+
     }
 }

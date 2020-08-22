@@ -289,7 +289,16 @@ public final class WorldModel
 
     public void spawnTrump(Point pos, ImageStore imageStore) {
         Trump trump = Trump.createTrump("trump", pos, imageStore.getImageList("rump"));
+
+
         addEntity(trump);
+
+
+    }
+    public void spawnWall(Point pos, ImageStore imageStore){
+        Wall hugeWall = Wall.createWall("wall", pos, imageStore.getImageList("wall"));
+
+        addEntity(hugeWall);
     }
 
     public Optional<Entity> nearestMiner(Point pos) {
