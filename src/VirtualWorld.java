@@ -91,7 +91,10 @@ public final class VirtualWorld extends PApplet
     //mouse pressed Event
     public void mouseClicked(){
         Point p = mousePosition();
-        world.spawnTrump(view.getViewPort().viewportToWorld(p.getX(), p.getY()), getImageStore());
+        Point position = view.getViewPort().viewportToWorld(p.getX(), p.getY());
+        Trump trump = Jailor.createJailor("trump", position, imageStore.getImageList("rump"));
+        world.addEntity(trump);
+        trump.scheduleActions(scheduler, world, imageStore);
     }
 
     public void keyPressed() {
