@@ -287,11 +287,6 @@ public final class WorldModel
         return nearestEntity(ofType, pos);
     }
 
-    public void spawnTrump(Point pos, ImageStore imageStore) {
-        Trump trump = Trump.createTrump("trump", pos, imageStore.getImageList("rump"));
-        addEntity(trump);
-    }
-
     public Optional<Entity> nearestMiner(Point pos) {
 
         List<Entity> miners = new LinkedList<>();

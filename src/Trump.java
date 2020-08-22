@@ -3,15 +3,10 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class Trump extends MovingEntity {
+abstract public class Trump extends MovingEntity {
 
     public Trump(String id, Point position, List<PImage> images, int index, int actionPeriod, int animationPeriod) {
         super(id, position, images, index, actionPeriod, animationPeriod);
-        System.out.println("try" + position.getX());
-    }
-
-    public static Trump createTrump(String id, Point pos, List<PImage> images) {
-        return new Trump(id, pos, images, 0, 2, 100);
     }
 
     @Override
@@ -34,7 +29,6 @@ public class Trump extends MovingEntity {
             return false;
         }
     }
-
     @Override
     public Point nextPosition(WorldModel world, Point destPos) {
         int horiz = Integer.signum(destPos.getX() - super.getPosition().getX());
@@ -51,23 +45,4 @@ public class Trump extends MovingEntity {
         return newPos;
     }
 
-    @Override
-    public void executeActivity(
-            WorldModel world,
-            ImageStore imageStore,
-            EventScheduler scheduler) {
-        Optional<Entity> trumpTarget =
-                world.nearestMiner(super.getPosition());
-
-        if (trumpTarget.isPresent() && moveTo(world,
-                trumpTarget.get(), scheduler)) {
-            world.removeEntity(trumpTarget.get());
-            scheduler.unscheduleAllEvents(trumpTarget.get());
-        }
-        else {
-            scheduler.scheduleEvent(this,
-                    createActivityAction(world, imageStore),
-                    super.getActionPeriod());
-        }
-    }
 }
