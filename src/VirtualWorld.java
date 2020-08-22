@@ -97,6 +97,8 @@ public final class VirtualWorld extends PApplet
         trump.scheduleActions(scheduler, world, imageStore);
     }
 
+
+
     public void keyPressed() {
         if (key == CODED) {
             int dx = 0;

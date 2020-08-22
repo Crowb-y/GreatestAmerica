@@ -225,6 +225,12 @@ public final class WorldModel
         return false;
     }
 
+    public void spawnWall(Point pos, ImageStore imageStore) {
+        Wall hugeWall = Wall.createWall("Wall", pos, imageStore.getImageList("wall"));
+        addEntity(hugeWall);
+    }
+
+
     private void tryAddEntity(Entity entity) {
         if (isOccupied(entity.getPosition())) {
             // arguably the wrong type of exception, but we are not
@@ -320,6 +326,7 @@ public final class WorldModel
             entity.setPosition(pos);
         }
     }
+
 
     public void removeEntity(Entity entity) {removeEntityAt(entity.getPosition()); }
 
