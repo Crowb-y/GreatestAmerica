@@ -287,6 +287,24 @@ public final class WorldModel
         return nearestEntity(ofType, pos);
     }
 
+    public void spawnTrump(Point pos, ImageStore imageStore) {
+        Trump trump = Trump.createTrump("trump", pos, imageStore.getImageList("rump"));
+        addEntity(trump);
+    }
+
+    public Optional<Entity> nearestMiner(Point pos) {
+
+        List<Entity> miners = new LinkedList<>();
+        for (Entity entity : this.entities) {
+            if (MinerFull.class.isInstance(entity) ||
+                    MinerNotFull.class.isInstance(entity)) {
+                miners.add(entity);
+            }
+        }
+
+        return nearestEntity(miners, pos);
+    }
+
     /*
        Assumes that there is no entity currently occupying the
        intended destination cell.

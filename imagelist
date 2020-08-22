@@ -22,6 +22,12 @@ quake images/quake3.bmp 255 255 255 0
 quake images/quake4.bmp 255 255 255 0
 quake images/quake5.bmp 255 255 255 0
 quake images/quake6.bmp 255 255 255 0
+rump images/rump1.bmp 255 255 255 0
+rump images/rump2.bmp 255 255 255 0
+rump images/rump3.bmp 255 255 255 0
+rump images/rump4.bmp 255 255 255 0
+rump images/rump5.bmp 255 255 255 0
+rump images/rump6.bmp 255 255 255 0
 ore images/ore.bmp 201 26 26 0
 obstacle images/obstacle.bmp
 grass images/grass.bmp

@@ -89,17 +89,7 @@ public final class VirtualWorld extends PApplet
 
     //mouse pressed Event
     public void mouseClicked(){
-        int dx = 0;
-        int dy = 0;
-        if(dx == 0 && dy == 0){
-            dx = 20;
-            dy = 20;
-        }
-        else{
-            dx= 0;
-            dy= 0;
-        }
-        view.shiftView(dx, dy);
+        world.spawnTrump(mousePosition(), imageStore);
     }
 
     public void keyPressed() {
