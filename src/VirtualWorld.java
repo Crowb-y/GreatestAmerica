@@ -89,7 +89,8 @@ public final class VirtualWorld extends PApplet
 
     //mouse pressed Event
     public void mouseClicked(){
-        world.spawnTrump(mousePosition(), getImageStore());
+        Point p = mousePosition();
+        world.spawnTrump(view.getViewPort().viewportToWorld(p.getX(), p.getY()), getImageStore());
     }
 
     public void keyPressed() {
