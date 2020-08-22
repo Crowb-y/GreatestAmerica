@@ -226,6 +226,7 @@ public final class WorldModel
     }
 
     public void spawnWall(Point pos, ImageStore imageStore) {
+
         Wall hugeWall = Wall.createWall("Wall", pos, imageStore.getImageList("wall"));
         addEntity(hugeWall);
     }
