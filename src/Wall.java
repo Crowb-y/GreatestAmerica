@@ -5,7 +5,6 @@ import java.util.Optional;
 public class Wall extends Entity{
 
     public Wall(String id, Point position, List<PImage> images, int index){
-
         super(id, position, images, index);
     }
 
