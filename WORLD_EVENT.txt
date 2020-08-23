@@ -1,0 +1,72 @@
+Welcome the greatest game ever made, commonly known as
+"Greatest America" a simulation of the promising utopia
+we live in!
+
+1.) Use your mouse and click within a cell anywhere on in the game to trigger an event
+
+2.) what should happen when the event is triggered
+
+When the event is trigger a HUGE Wall will be erected and all the dirty miners will be
+rounded up and stored in the wall by Donald(originally called Jailer) and all of the
+Ore Blobs will be turned into spinning gold bars by Melania(originally called Midas).
+Finally when Greatest America is great again you will get a lovely quote from the
+Supreme President himself.
+
+3.) what the affected entities should do
+
+    * Miners- Will behave as normal miners, until they are met with the Great
+        unstoppable force of Donald. Upon meeting his grace they will be
+        promptly "poofed" into the HUGE wall he has erected and be stuck there
+        until the world is great again.
+
+    * Ore Blobs- Once the ore blobs are created they are swiftly tracked down
+    and turned into gold by the Supreme Queen of Gold herself, Melania.
+
+
+4.) what the new entity is and how it should behave
+
+    * Donald(Trump) - Will hunt down the dirty miners with amazing speed,
+        teleportation and the vigor of a man with very large hands. He will
+        "poof" the miners into the illustrious Wall he erected and continue his
+        unrelenting hunt until he is finished.
+
+    * Melania(Trump) - Will track down the Ore Blobs as they appear with the same
+        over powered abilities as her husband, and Great Overlord. She will turn the
+        Ore Blobs into beautiful bars of spinning gold!
+
+    * Wall - The Huge Wall will be erected in a square shape and will serve as an obstacle
+        for all the dirty miners who attempt to escape. Within the walls all background tiles
+        will be set to Mud and entities inside the Wall will be set to Captured and all obstacles
+        will be removed.
+
+    * Text - When the Simulation has completed and the Greatest America is Great Again
+        the Text entity will be spawned and share the great message our Supreme Leader
+        has to share!
+
+5.)Partners:
+    Avi Peltz:
+    - WORLD_EVENT.txt
+    - Melania
+    - Mouse Click
+    - Image Selection
+    - Gold Ore Blobs
+    - Text Class
+    - Nearest Blob
+
+    Jarrod Tart:
+    - UML
+    - Donald
+    - Image Conversion/Editing Image List
+    - Wall Construction
+    - Background Tile Change
+    - Win Condition
+    - Nearest Miner
+
+    Together:
+       - Trump
+       - Fixing problems from Project 3
+       - Debugging and Testing
+       - Theme/Ideas
+       - Fun Times and Laughs :)
+
+       Thank you! This project was very fun and we hope you get a laugh out of it!:)
