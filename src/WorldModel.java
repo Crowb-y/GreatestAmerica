@@ -334,7 +334,9 @@ public final class WorldModel
     }
 
 
-    public void removeEntity(Entity entity) {removeEntityAt(entity.getPosition()); }
+    public void removeEntity(Entity entity) {
+        removeEntityAt(entity.getPosition());
+    }
 
     private void removeEntityAt(Point pos) {
         if (withinBounds(pos) && getOccupancyCell(pos) != null) {

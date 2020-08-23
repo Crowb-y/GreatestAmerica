@@ -9,8 +9,8 @@ we live in!
 When the event is trigger a HUGE Wall will be erected and all the dirty miners will be
 rounded up and stored in the wall by Donald(originally called Jailer) and all of the
 Ore Blobs will be turned into spinning gold bars by Melania(originally called Midas).
-Finally when Greatest America is great again you will get a lovely quote from the
-Supreme President himself.
+Finally when Greatest America is great again all of the gold will surround the Great Donald
+and you will get a lovely quote from the Supreme President himself.
 
 3.) what the affected entities should do
 
@@ -20,7 +20,9 @@ Supreme President himself.
         until the world is great again.
 
     * Ore Blobs- Once the ore blobs are created they are swiftly tracked down
-    and turned into gold by the Supreme Queen of Gold herself, Melania.
+    and turned into gold by the Divine Queen of Gold herself, Melania. Once
+    Melania's work has finished all of the Gold will naturally flow and surround
+    the Supreme Overlord Donald.
 
 
 4.) what the new entity is and how it should behave
@@ -32,7 +34,8 @@ Supreme President himself.
 
     * Melania(Trump) - Will track down the Ore Blobs as they appear with the same
         over powered abilities as her husband, and Great Overlord. She will turn the
-        Ore Blobs into beautiful bars of spinning gold!
+        Ore Blobs into beautiful bars of spinning gold, the blobs are enchanted with
+        a greed spell that pulls them to Donald.
 
     * Wall - The Huge Wall will be erected in a square shape and will serve as an obstacle
         for all the dirty miners who attempt to escape. Within the walls all background tiles
@@ -44,6 +47,7 @@ Supreme President himself.
         has to share!
 
 5.)Partners:
+
     Avi Peltz:
     - WORLD_EVENT.txt
     - Melania
@@ -62,11 +66,11 @@ Supreme President himself.
     - Win Condition
     - Nearest Miner
 
-
     Together:
        - Trump
        - Fixing problems from Project 3
        - Debugging and Testing
+       - Other functionality we might have forgot to write down
        - Theme/Ideas
        - Fun Times and Laughs :)
 
