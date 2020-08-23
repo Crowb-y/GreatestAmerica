@@ -39,6 +39,7 @@ melon images/melon3.bmp 255 255 255 0
 melon images/melon4.bmp 255 255 255 0
 melon images/melon5.bmp 255 255 255 0
 melon images/melon6.bmp 255 255 255 0
+text images/globalwarming.bmp 255 255 255 0
 mud images/mud.bmp
 ore images/ore.bmp 201 26 26 0
 obstacle images/obstacle.bmp

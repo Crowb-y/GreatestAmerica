@@ -5,7 +5,8 @@ import java.util.List;
 abstract public class MovingEntity extends AnimatedEntity {
 
     public static int numCaptured;
-    public static int numNonTrump;
+    public static int numBlobs;
+    public static int numMiners;
 
     private boolean captured;
 
@@ -30,7 +31,10 @@ abstract public class MovingEntity extends AnimatedEntity {
     public void setCaptured() { captured = true; }
 
     public static boolean checkWinCondition() {
-        return (numNonTrump - numCaptured) == 0;
+        if (numBlobs > 0)
+            return (numBlobs + numMiners - numCaptured) == 0;
+        else
+            return false;
     }
 
 }

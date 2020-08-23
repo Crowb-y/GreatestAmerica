@@ -117,7 +117,7 @@ public final class WorldModel
                     Integer.parseInt(properties[MINER_LIMIT]));
             tryAddEntity(entity);
         }
-        MovingEntity.numNonTrump += 1;
+        MovingEntity.numMiners += 1;
         return properties.length == MINER_NUM_PROPERTIES;
     }
 

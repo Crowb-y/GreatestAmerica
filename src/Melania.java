@@ -28,6 +28,7 @@ public class Melania extends Trump{
             ((MovingEntity)target).setCaptured();
             MovingEntity.numCaptured += 1;
             target.setImages(imageStore.getImageList("gold"));
+            target.setImageIndex(0);
             super.scheduleActions(scheduler, world, imageStore);
         }
         else {

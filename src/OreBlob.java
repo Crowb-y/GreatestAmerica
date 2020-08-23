@@ -22,7 +22,7 @@ public class OreBlob extends MovingEntity {
     }
 
     public static OreBlob createOreBlob(String id, Point position, int imageIndex, int actionPeriod, ImageStore imageStore) {
-        MovingEntity.numNonTrump += 1;
+        MovingEntity.numBlobs += 1;
         return new OreBlob(
                 id + BLOB_ID_SUFFIX, position,
                 imageStore.getImageList(BLOB_KEY), imageIndex,
