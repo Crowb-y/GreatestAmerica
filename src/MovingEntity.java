@@ -4,10 +4,13 @@ import java.util.List;
 
 abstract public class MovingEntity extends AnimatedEntity {
 
+    // these static variables are used to tell the game when the Trumps win.
+
     public static int numCaptured;
     public static int numBlobs;
     public static int numMiners;
 
+    // this boolean value is only set to true when a trump has interacted with a MovingEntity
     private boolean captured;
 
     public MovingEntity(String id, Point position, List<PImage> images, int index,
@@ -30,6 +33,7 @@ abstract public class MovingEntity extends AnimatedEntity {
 
     public void setCaptured() { captured = true; }
 
+    // Win condition check called by VirtualWorld during every tick.
     public static boolean checkWinCondition() {
         if (numBlobs > 0)
             return (numBlobs + numMiners - numCaptured) == 0;

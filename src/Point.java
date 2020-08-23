@@ -32,6 +32,7 @@ public final class Point
                 && Math.abs(this.x - other.x) == 1);
     }
 
+    //added to briefly make our lives easier
     public Point translate(Point p) {
         return new Point(x + p.getX(), y + p.getY());
     }

@@ -5,13 +5,16 @@ import java.util.Optional;
 
 abstract public class Trump extends MovingEntity {
 
-    int tpCoolDown;
+    private int tpCoolDown;
 
     public Trump(String id, Point position, List<PImage> images, int index, int actionPeriod, int animationPeriod) {
         super(id, position, images, index, actionPeriod, animationPeriod);
         tpCoolDown = 0;
     }
 
+    /* The Trump Abstract class implements an overpowered adjusted moveTo for both Melania and Donald
+    * to use. The main difference is an added teleport case and teleport cool down. When a Trump inheriting
+    * entity gets stuck, it will teleport to an open space around its target. */
     @Override
     public boolean moveTo(
             WorldModel world,

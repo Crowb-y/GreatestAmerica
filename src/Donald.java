@@ -19,6 +19,13 @@ public class Donald extends Trump {
         return new Donald(id, pos, images, 0, 1, 1, jailPos, quakeImages);
     }
 
+    /* Donald's execute activity will enable him to relentlessly hunt down
+    * every miner on the world, and 'poofs' them to his corresponding jail.
+    * The miners affected will be set to a captured state, and the numCaptured
+    * will be incremented to keep track of his great victory. Combined with the
+    * overpowered teleportation ability in the parent classes moveTo, Donald is
+    * an unstoppable force */
+
     @Override
     public void executeActivity(
             WorldModel world,

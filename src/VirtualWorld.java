@@ -85,7 +85,7 @@ public final class VirtualWorld extends PApplet
         }
         if (MovingEntity.checkWinCondition() && hasWon != true){
             System.out.println("winner !!");
-            world.addEntity(Text.createText("Text", (new Point(15, 15)), imageStore.getImageList("text")));
+            world.addEntity(Text.createText("Text", (new Point(10, 15)), imageStore.getImageList("text")));
             hasWon = true;
         }
 
@@ -173,6 +173,7 @@ public final class VirtualWorld extends PApplet
                     world.removeEntity(occupant.get());
                 if (occupant.isPresent() && MovingEntity.class.isInstance(occupant.get()))
                     ((MovingEntity) occupant.get()).setCaptured();
+
                 world.setBackgroundCell(tile, mud);
             }
         }

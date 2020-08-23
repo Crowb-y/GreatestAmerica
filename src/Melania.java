@@ -16,7 +16,13 @@ public class Melania extends Trump{
         return new Melania(id, pos, images, 0, 10, 1);
     }
 
-    //Still need to edit below
+    /* Melania plays a key role in the Trump team. While Donald has to deal with the
+    * hooligan miners, Melania's job is to not let the ore go to waste. Don't ask why
+    * Melania has the ability of King Midas, she just does. With the miners gone, there are
+    * plenty of oreBlobs for her to turn into spinning gold bars. To keep track of the ultimate win state
+    * (Miners and oreBlobs completely captured) we set the OreBlobs captured state to true in addition to updating
+    * its imageList and imageIndex. Besides this the behavior is the same. */
+
     @Override
     public void executeActivity(WorldModel world, ImageStore imageStore,
             EventScheduler scheduler) {
