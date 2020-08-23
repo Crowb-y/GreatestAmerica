@@ -5,8 +5,11 @@ import java.util.Optional;
 
 abstract public class Trump extends MovingEntity {
 
+    int tpCoolDown;
+
     public Trump(String id, Point position, List<PImage> images, int index, int actionPeriod, int animationPeriod) {
         super(id, position, images, index, actionPeriod, animationPeriod);
+        tpCoolDown = 0;
     }
 
     @Override
@@ -14,11 +17,19 @@ abstract public class Trump extends MovingEntity {
             WorldModel world,
             Entity target,
             EventScheduler scheduler) {
+        if (tpCoolDown > 0) {
+            tpCoolDown--;
+            return true;
+        }
         if (super.getPosition().adjacent(target.getPosition())) {
             return true;
-        } else {
+        }
+        else {
             Point nextPos = nextPosition(world, target.getPosition());
-
+            if (getPosition().equals(nextPos)) {
+                nextPos = world.findOpenAround(world.nearestMiner(getPosition()).get().getPosition()).get();
+                tpCoolDown = 10;
+            }
             if (!super.getPosition().equals(nextPos)) {
                 Optional<Entity> occupant = world.getOccupant(nextPos);
                 if (occupant.isPresent()) {
@@ -45,4 +56,5 @@ abstract public class Trump extends MovingEntity {
         return newPos;
     }
 
+    protected int getTpCoolDown() { return tpCoolDown; }
 }
