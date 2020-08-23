@@ -308,6 +308,7 @@ public final class WorldModel
         return nearestEntity(filteredMiners, pos);
     }
 
+
     /*
        Assumes that there is no entity currently occupying the
        intended destination cell.

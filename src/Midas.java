@@ -5,31 +5,27 @@ import java.util.Optional;
 
 public class Midas extends Trump{
 
-    private Point jailPos;
-
     public Midas(String id, Point position, List<PImage> images, int index, int actionPeriod,
-                  int animationPeriod, Point jailPos) {
+                  int animationPeriod) {
         super(id, position, images, index, actionPeriod, animationPeriod);
-        this.jailPos = jailPos;
+
     }
 
     public static Midas createMidas(String id, Point pos, List<PImage> images,Point jailPos) {
-        return new Midas(id, pos, images, 0, 20, 150, jailPos);
+        return new Midas(id, pos, images, 0, 20, 150);
     }
 
     //Still need to edit below
     @Override
-    public void executeActivity(
-            WorldModel world,
-            ImageStore imageStore,
+    public void executeActivity(WorldModel world, ImageStore imageStore,
             EventScheduler scheduler) {
         Optional<Entity> trumpTarget =
-                world.nearestMiner(super.getPosition());
+                world.findNearest(super.getPosition(), super.getClass());
         if (trumpTarget.isPresent() && moveTo(world,
                 trumpTarget.get(), scheduler)) {
             Entity target = trumpTarget.get();
-            world.moveEntity(target, jailPos);
             ((MovingEntity)target).setCaptured();
+            target.setImages(imageStore.getImageList("gold"));
             super.scheduleActions(scheduler, world, imageStore);
         }
         else {

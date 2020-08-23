@@ -9,11 +9,11 @@ public class OreBlob extends MovingEntity {
     private static final String BLOB_KEY = "blob";
     private static final String BLOB_ID_SUFFIX = " -- blob";
     private static final String QUAKE_KEY = "quake";
+    private static final String GOLD_KEY = "gold";
     private static final int BLOB_PERIOD_SCALE = 4;
     private static final int BLOB_ANIMATION_MIN = 50;
     private static final int BLOB_ANIMATION_MAX = 150;
 
-    private List<PImage> goldenImages;
     private List<PImage> quakeImages;
 
     public OreBlob(String id, Point position, List<PImage> images, int index,
@@ -80,12 +80,6 @@ public class OreBlob extends MovingEntity {
         }
     }
 
-    //effect transforming the oreblob to gold
-    public void tranformToGold(MovingEntity blobOfChoice, List<PImage> goldImages){
-        if(blobOfChoice.getCaptured() == true){
-            blobOfChoice.setImages(goldenImages);
-        }
-    }
 
     @Override
     public Point nextPosition(
