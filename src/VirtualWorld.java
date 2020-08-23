@@ -91,19 +91,25 @@ public final class VirtualWorld extends PApplet
 
     //mouse pressed Event
     public void mouseClicked(){
-        Point p = mousePosition();
-        Point jailPos = view.getViewPort().viewportToWorld(p.getX(), p.getY());
-        Point trumpPos = view.getViewPort().viewportToWorld(p.getX() + 4, p.getY());
-        constructWalls(jailPos);
-        createFilth(jailPos);
-        spawnTrump(trumpPos, jailPos);
+        try {
+            Point p = mousePosition();
+            Point jailPos = view.getViewPort().viewportToWorld(p.getX(), p.getY());
+            Point trumpPos = view.getViewPort().viewportToWorld(p.getX() + 4, p.getY());
+            createFilth(jailPos);
+            constructWalls(jailPos);
+            spawnTrump(trumpPos, jailPos);
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage() + "\nCan't place Wall this close to edge");
+        }
     }
 
     public void spawnTrump(Point pos, Point jailPos){
         Optional<Entity> occupant = world.getOccupant(pos);
         if (occupant.isPresent())
             world.removeEntity(occupant.get());
-        Jailor trump = Jailor.createJailor("trump", pos, imageStore.getImageList("rump"), jailPos);
+        Jailor trump = Jailor.createJailor("trump", pos, imageStore.getImageList("rump"),
+                jailPos, imageStore.getImageList("quake"));
         world.addEntity(trump);
         trump.scheduleActions(scheduler, world, imageStore);
     }
@@ -151,6 +157,8 @@ public final class VirtualWorld extends PApplet
                 if (occupant.isPresent() &&
                         ((occupant.get().getClass() == Obstacle.class) || (occupant.get().getClass() == Wall.class)))
                     world.removeEntity(occupant.get());
+                if (occupant.isPresent() && MovingEntity.class.isInstance(occupant.get()))
+                    ((MovingEntity) occupant.get()).setCaptured();
                 world.setBackgroundCell(tile, mud);
             }
         }
