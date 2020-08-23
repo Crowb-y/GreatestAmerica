@@ -64,7 +64,7 @@ public class OreBlob extends MovingEntity {
             Entity target,
             EventScheduler scheduler)
     {
-        if (super.getPosition().adjacent(target.getPosition())) {
+        if (super.getPosition().adjacent(target.getPosition()) && super.getCaptured() == false) {
             world.removeEntity(target);
             scheduler.unscheduleAllEvents(target);
             return true;
