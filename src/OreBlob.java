@@ -13,6 +13,7 @@ public class OreBlob extends MovingEntity {
     private static final int BLOB_ANIMATION_MIN = 50;
     private static final int BLOB_ANIMATION_MAX = 150;
 
+    private List<PImage> goldenImages;
     private List<PImage> quakeImages;
 
     public OreBlob(String id, Point position, List<PImage> images, int index,
@@ -76,6 +77,13 @@ public class OreBlob extends MovingEntity {
                 world.moveEntity(this, nextPos);
             }
             return false;
+        }
+    }
+
+    //effect transforming the oreblob to gold
+    public void tranformToGold(MovingEntity blobOfChoice, List<PImage> goldImages){
+        if(blobOfChoice.getCaptured() == true){
+            blobOfChoice.setImages(goldenImages);
         }
     }
 
