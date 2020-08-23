@@ -6,6 +6,7 @@ import processing.core.PImage;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public final class WorldModel
 {
@@ -303,8 +304,8 @@ public final class WorldModel
                 miners.add(entity);
             }
         }
-
-        return nearestEntity(miners, pos);
+        List<Entity> filteredMiners = miners.stream().filter(m -> !((MovingEntity) m).getCaptured()).collect(Collectors.toList());
+        return nearestEntity(filteredMiners, pos);
     }
 
     /*
@@ -385,7 +386,7 @@ public final class WorldModel
         return this.background[pos.getY()][pos.getX()];
     }
 
-    private void setBackgroundCell(
+    public void setBackgroundCell(
             Point pos, Background background)
     {
         this.background[pos.getY()][pos.getX()] = background;

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 import java.util.Scanner;
 import processing.core.*;
 
@@ -91,10 +92,68 @@ public final class VirtualWorld extends PApplet
     //mouse pressed Event
     public void mouseClicked(){
         Point p = mousePosition();
-        Point position = view.getViewPort().viewportToWorld(p.getX(), p.getY());
-        Trump trump = Jailor.createJailor("trump", position, imageStore.getImageList("rump"));
+        Point jailPos = view.getViewPort().viewportToWorld(p.getX(), p.getY());
+        Point trumpPos = view.getViewPort().viewportToWorld(p.getX() + 4, p.getY());
+        constructWalls(jailPos);
+        createFilth(jailPos);
+        spawnTrump(trumpPos, jailPos);
+    }
+
+    public void spawnTrump(Point pos, Point jailPos){
+        Optional<Entity> occupant = world.getOccupant(pos);
+        if (occupant.isPresent())
+            world.removeEntity(occupant.get());
+        Jailor trump = Jailor.createJailor("trump", pos, imageStore.getImageList("rump"), jailPos);
         world.addEntity(trump);
         trump.scheduleActions(scheduler, world, imageStore);
+    }
+    public void constructWalls(Point pos) {
+        int i = -3;
+        while (i < 4) {
+            Point top = new Point(pos.getX() + i, pos.getY() + 3);
+            Point bottom = new Point(pos.getX() + i, pos.getY() - 3);
+            Optional<Entity> topEntity = world.getOccupant(top);
+            Optional<Entity> botEntity = world.getOccupant(bottom);
+            if (topEntity.isPresent())
+                world.removeEntity(topEntity.get());
+            if (botEntity.isPresent())
+                world.removeEntity(botEntity.get());
+            Wall topWall = Wall.createWall("wall", top, imageStore.getImageList("wall"));
+            world.addEntity(topWall);
+            Wall botWall = Wall.createWall("wall", bottom, imageStore.getImageList("wall"));
+            world.addEntity(botWall);
+            i++;
+        }
+        int j = -2;
+        while (j < 3) {
+            Point left = new Point(pos.getX() - 3, pos.getY() + j);
+            Point right = new Point(pos.getX() + 3, pos.getY() + j);
+            Optional<Entity> leftEntity = world.getOccupant(left);
+            Optional<Entity> rightEntity = world.getOccupant(right);
+            if (leftEntity.isPresent())
+                world.removeEntity(leftEntity.get());
+            if (rightEntity.isPresent())
+                world.removeEntity(rightEntity.get());
+            Wall leftWall = Wall.createWall("wall", left, imageStore.getImageList("wall"));
+            world.addEntity(leftWall);
+            Wall rightWall = Wall.createWall("wall", right, imageStore.getImageList("wall"));
+            world.addEntity(rightWall);
+            j++;
+        }
+    }
+
+    public void createFilth(Point pos) {
+        for (int i = -2; i < 3; i++) {
+            for (int j = -2; j < 3; j++) {
+                Background mud = new Background("mud", imageStore.getImageList("mud"));
+                Point tile = new Point(pos.getX() + i, pos.getY() + j);
+                Optional<Entity> occupant = world.getOccupant(tile);
+                if (occupant.isPresent() &&
+                        ((occupant.get().getClass() == Obstacle.class) || (occupant.get().getClass() == Wall.class)))
+                    world.removeEntity(occupant.get());
+                world.setBackgroundCell(tile, mud);
+            }
+        }
     }
 
 

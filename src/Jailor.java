@@ -5,12 +5,16 @@ import java.util.Optional;
 
 public class Jailor extends Trump {
 
-    public Jailor(String id, Point position, List<PImage> images, int index, int actionPeriod, int animationPeriod) {
+    private Point jailPos;
+
+    public Jailor(String id, Point position, List<PImage> images, int index, int actionPeriod,
+                  int animationPeriod, Point jailPos) {
         super(id, position, images, index, actionPeriod, animationPeriod);
+        this.jailPos = jailPos;
     }
 
-    public static Jailor createJailor(String id, Point pos, List<PImage> images) {
-        return new Jailor(id, pos, images, 0, 10, 5);
+    public static Jailor createJailor(String id, Point pos, List<PImage> images, Point jailPos) {
+        return new Jailor(id, pos, images, 0, 20, 150, jailPos);
     }
 
     @Override
@@ -20,12 +24,11 @@ public class Jailor extends Trump {
             EventScheduler scheduler) {
         Optional<Entity> trumpTarget =
                 world.nearestMiner(super.getPosition());
-        System.out.println(trumpTarget.get().toString());
-
         if (trumpTarget.isPresent() && moveTo(world,
                 trumpTarget.get(), scheduler)) {
-            world.removeEntity(trumpTarget.get());
-            scheduler.unscheduleAllEvents(trumpTarget.get());
+            Entity target = trumpTarget.get();
+            world.moveEntity(target, jailPos);
+            ((MovingEntity)target).setCaptured();
             super.scheduleActions(scheduler, world, imageStore);
         }
         else {
