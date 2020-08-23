@@ -38,6 +38,10 @@ public class OreBlob extends MovingEntity {
                 world.findNearest(super.getPosition(), Vein.class);
         long nextPeriod = super.getActionPeriod();
 
+        //captured oreBlobs migrate to Donald
+        if (super.getCaptured())
+            blobTarget = world.findNearest(super.getPosition(), Donald.class);
+
         if (blobTarget.isPresent()) {
             Point tgtPos = blobTarget.get().getPosition();
 

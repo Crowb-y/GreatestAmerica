@@ -4,7 +4,7 @@ import java.util.List;
 
 abstract public class ActiveEntity extends Entity {
 
-    private final int actionPeriod;
+    private int actionPeriod;
 
     public ActiveEntity(String id, Point position, List<PImage> images, int index, int actionPeriod) {
         super(id, position, images, index);
@@ -31,4 +31,6 @@ abstract public class ActiveEntity extends Entity {
     protected int getActionPeriod() {
         return actionPeriod;
     }
+
+    protected void setActionPeriod(int actionPeriod) {this.actionPeriod = actionPeriod; }
 }
