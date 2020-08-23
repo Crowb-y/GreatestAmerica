@@ -40,6 +40,9 @@ public final class VirtualWorld extends PApplet
     private WorldView view;
     private EventScheduler scheduler;
     private long nextTime;
+    private boolean hasWon;
+
+
 
     public ImageStore getImageStore() {return imageStore;}
     public WorldModel getWorld() {return world;}
@@ -55,6 +58,7 @@ public final class VirtualWorld extends PApplet
        Processing entry point for "sketch" setup.
     */
     public void setup() {
+        hasWon = false;
         this.imageStore = new ImageStore(
                 createImageColored(TILE_WIDTH, TILE_HEIGHT,
                                    DEFAULT_IMAGE_COLOR));
@@ -72,14 +76,19 @@ public final class VirtualWorld extends PApplet
         nextTime = System.currentTimeMillis() + TIMER_ACTION_PERIOD;
     }
 
+
     public void draw() {
         long time = System.currentTimeMillis();
         if (time >= nextTime) {
             this.scheduler.updateOnTime(time);
             nextTime = time + TIMER_ACTION_PERIOD;
         }
-        if (MovingEntity.checkWinCondition())
-            System.out.println("winner winner");
+        if (MovingEntity.checkWinCondition() && hasWon != true){
+            System.out.println("winner !!");
+            world.addEntity(Text.createText("Text", (new Point(15, 15)), imageStore.getImageList("text")));
+            hasWon = true;
+        }
+
         view.drawViewport();
     }
 
