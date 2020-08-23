@@ -4,6 +4,9 @@ import java.util.List;
 
 abstract public class MovingEntity extends AnimatedEntity {
 
+    public static int numCaptured;
+    public static int numNonTrump;
+
     private boolean captured;
 
     public MovingEntity(String id, Point position, List<PImage> images, int index,
@@ -25,5 +28,9 @@ abstract public class MovingEntity extends AnimatedEntity {
     public boolean getCaptured() { return captured; }
 
     public void setCaptured() { captured = true; }
+
+    public static boolean checkWinCondition() {
+        return (numNonTrump - numCaptured) == 0;
+    }
 
 }

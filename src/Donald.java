@@ -3,20 +3,20 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class Jailor extends Trump {
+public class Donald extends Trump {
 
     private Point jailPos;
     private List<PImage> quakeImages;
 
-    public Jailor(String id, Point position, List<PImage> images, int index, int actionPeriod,
+    public Donald(String id, Point position, List<PImage> images, int index, int actionPeriod,
                   int animationPeriod, Point jailPos, List<PImage> quakeImages) {
         super(id, position, images, index, actionPeriod, animationPeriod);
         this.jailPos = jailPos;
         this.quakeImages = quakeImages;
     }
 
-    public static Jailor createJailor(String id, Point pos, List<PImage> images, Point jailPos, List<PImage> quakeImages) {
-        return new Jailor(id, pos, images, 0, 1, 1, jailPos, quakeImages);
+    public static Donald createDonald(String id, Point pos, List<PImage> images, Point jailPos, List<PImage> quakeImages) {
+        return new Donald(id, pos, images, 0, 1, 1, jailPos, quakeImages);
     }
 
     @Override
@@ -37,6 +37,7 @@ public class Jailor extends Trump {
             world.addEntity(quake);
             quake.scheduleActions(scheduler, world, imageStore);
             ((MovingEntity)target).setCaptured();
+            MovingEntity.numCaptured += 1;
             super.scheduleActions(scheduler, world, imageStore);
         }
         else {

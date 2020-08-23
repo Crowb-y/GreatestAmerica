@@ -3,17 +3,17 @@ import processing.core.PImage;
 import java.util.List;
 import java.util.Optional;
 
-public class Midas extends Trump{
+public class Melania extends Trump{
 
-    public Midas(String id, Point position, List<PImage> images, int index, int actionPeriod,
+    public Melania(String id, Point position, List<PImage> images, int index, int actionPeriod,
                   int animationPeriod) {
         super(id, position, images, index, actionPeriod, animationPeriod);
 
     }
 
-    public static Midas createMidas(String id, Point pos, List<PImage> images) {
+    public static Melania createMelania(String id, Point pos, List<PImage> images) {
 
-        return new Midas(id, pos, images, 0, 20, 150);
+        return new Melania(id, pos, images, 0, 10, 1);
     }
 
     //Still need to edit below
@@ -26,6 +26,7 @@ public class Midas extends Trump{
                 trumpTarget.get(), scheduler) && super.getTpCoolDown() == 0) {
             Entity target = trumpTarget.get();
             ((MovingEntity)target).setCaptured();
+            MovingEntity.numCaptured += 1;
             target.setImages(imageStore.getImageList("gold"));
             super.scheduleActions(scheduler, world, imageStore);
         }

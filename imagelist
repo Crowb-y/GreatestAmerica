@@ -33,6 +33,12 @@ gold images/gold.bmp 255 255 255 0
 gold images/gold1.bmp 255 255 255 0
 gold images/gold2.bmp 255 255 255 0
 gold images/gold3.bmp 255 255 255 0
+melon images/melon1.bmp 255 255 255 0
+melon images/melon2.bmp 255 255 255 0
+melon images/melon3.bmp 255 255 255 0
+melon images/melon4.bmp 255 255 255 0
+melon images/melon5.bmp 255 255 255 0
+melon images/melon6.bmp 255 255 255 0
 mud images/mud.bmp
 ore images/ore.bmp 201 26 26 0
 obstacle images/obstacle.bmp

@@ -78,7 +78,8 @@ public final class VirtualWorld extends PApplet
             this.scheduler.updateOnTime(time);
             nextTime = time + TIMER_ACTION_PERIOD;
         }
-
+        if (MovingEntity.checkWinCondition())
+            System.out.println("winner winner");
         view.drawViewport();
     }
 
@@ -108,13 +109,13 @@ public final class VirtualWorld extends PApplet
         Optional<Entity> occupant = world.getOccupant(pos);
         if (occupant.isPresent())
             world.removeEntity(occupant.get());
-        Jailor jailor = Jailor.createJailor("trump", pos, imageStore.getImageList("rump"),
+        Donald donald = Donald.createDonald("trump", pos, imageStore.getImageList("rump"),
                 jailPos, imageStore.getImageList("quake"));
-        Midas midas = Midas.createMidas("trump", pos.translate(new Point(0, -1)), imageStore.getImageList("rump"));
-        world.addEntity(jailor);
-        world.addEntity(midas);
-        jailor.scheduleActions(scheduler, world, imageStore);
-        midas.scheduleActions(scheduler, world, imageStore);
+        Melania melania = Melania.createMelania("trump", pos.translate(new Point(0, -1)), imageStore.getImageList("melon"));
+        world.addEntity(donald);
+        world.addEntity(melania);
+        donald.scheduleActions(scheduler, world, imageStore);
+        melania.scheduleActions(scheduler, world, imageStore);
     }
 
     public void constructWalls(Point pos) {
