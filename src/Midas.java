@@ -12,6 +12,7 @@ public class Midas extends Trump{
     }
 
     public static Midas createMidas(String id, Point pos, List<PImage> images,Point jailPos) {
+
         return new Midas(id, pos, images, 0, 20, 150);
     }
 
