@@ -6,7 +6,7 @@ abstract public class Entity {
 
     private final String id;
     private Point position;
-    private final List<PImage> images;
+    private List<PImage> images;
     private int imageIndex;
 
     public Entity(String id, Point position, List<PImage> images, int index) {
@@ -23,6 +23,8 @@ abstract public class Entity {
     protected void setPosition(Point position) {
         this.position = position;
     }
+
+    protected void setImages(List<PImage> myImages){ this.images = myImages; }
 
     protected void setImageIndex(int index) {this.imageIndex = index; }
 

@@ -156,8 +156,6 @@ public final class VirtualWorld extends PApplet
         }
     }
 
-
-
     public void keyPressed() {
         if (key == CODED) {
             int dx = 0;
