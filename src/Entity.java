@@ -26,7 +26,9 @@ abstract public class Entity {
 
     protected void setImages(List<PImage> myImages){ this.images = myImages; }
 
-    protected void setImageIndex(int index) {this.imageIndex = index; }
+    protected void setImageIndex(int index) {
+        this.imageIndex = index;
+    }
 
     protected int getImageIndex() { return this.imageIndex; }
 
