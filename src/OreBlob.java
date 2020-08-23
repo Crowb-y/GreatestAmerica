@@ -81,9 +81,9 @@ public class OreBlob extends MovingEntity {
     }
 
     //effect transforming the oreblob to gold
-    public void tranformToGold(MovingEntity blobOfChoice){
+    public void tranformToGold(MovingEntity blobOfChoice, List<PImage> goldImages){
         if(blobOfChoice.getCaptured() == true){
-
+            blobOfChoice.setImages(goldenImages);
         }
     }
 
