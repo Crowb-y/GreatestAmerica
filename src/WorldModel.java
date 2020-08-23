@@ -226,13 +226,6 @@ public final class WorldModel
         return false;
     }
 
-    public void spawnWall(Point pos, ImageStore imageStore) {
-
-        Wall hugeWall = Wall.createWall("Wall", pos, imageStore.getImageList("wall"));
-        addEntity(hugeWall);
-    }
-
-
     private void tryAddEntity(Entity entity) {
         if (isOccupied(entity.getPosition())) {
             // arguably the wrong type of exception, but we are not
@@ -308,7 +301,17 @@ public final class WorldModel
         return nearestEntity(filteredMiners, pos);
     }
 
+    public Optional<Entity> nearestBlob(Point pos) {
 
+        List<Entity> blobs = new LinkedList<>();
+        for (Entity entity : this.entities) {
+            if (OreBlob.class.isInstance(entity)) {
+                blobs.add(entity);
+            }
+        }
+        List<Entity> filteredMiners = blobs.stream().filter(m -> !((MovingEntity) m).getCaptured()).collect(Collectors.toList());
+        return nearestEntity(filteredMiners, pos);
+    }
     /*
        Assumes that there is no entity currently occupying the
        intended destination cell.

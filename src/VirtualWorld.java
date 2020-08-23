@@ -97,22 +97,26 @@ public final class VirtualWorld extends PApplet
             Point trumpPos = view.getViewPort().viewportToWorld(p.getX() + 4, p.getY());
             createFilth(jailPos);
             constructWalls(jailPos);
-            spawnTrump(trumpPos, jailPos);
+            spawnTrumps(trumpPos, jailPos);
         }
         catch(Exception e) {
             System.out.println(e.getMessage() + "\nCan't place Wall this close to edge");
         }
     }
 
-    public void spawnTrump(Point pos, Point jailPos){
+    public void spawnTrumps(Point pos, Point jailPos){
         Optional<Entity> occupant = world.getOccupant(pos);
         if (occupant.isPresent())
             world.removeEntity(occupant.get());
-        Jailor trump = Jailor.createJailor("trump", pos, imageStore.getImageList("rump"),
+        Jailor jailor = Jailor.createJailor("trump", pos, imageStore.getImageList("rump"),
                 jailPos, imageStore.getImageList("quake"));
-        world.addEntity(trump);
-        trump.scheduleActions(scheduler, world, imageStore);
+        Midas midas = Midas.createMidas("trump", pos.translate(new Point(0, -1)), imageStore.getImageList("rump"));
+        world.addEntity(jailor);
+        world.addEntity(midas);
+        jailor.scheduleActions(scheduler, world, imageStore);
+        midas.scheduleActions(scheduler, world, imageStore);
     }
+
     public void constructWalls(Point pos) {
         int i = -3;
         while (i < 4) {

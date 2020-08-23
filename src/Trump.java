@@ -27,8 +27,11 @@ abstract public class Trump extends MovingEntity {
         else {
             Point nextPos = nextPosition(world, target.getPosition());
             if (getPosition().equals(nextPos)) {
-                nextPos = world.findOpenAround(world.nearestMiner(getPosition()).get().getPosition()).get();
-                tpCoolDown = 10;
+                if (world.findOpenAround(target.getPosition()).isPresent()){
+                    nextPos = world.findOpenAround(target.getPosition()).get();
+                    tpCoolDown = 10;
+                }
+                world.moveEntity(this, nextPos);
             }
             if (!super.getPosition().equals(nextPos)) {
                 Optional<Entity> occupant = world.getOccupant(nextPos);

@@ -42,8 +42,8 @@ public class MinerNotFull extends MovingEntity {
     {
         if (this.resourceCount >= getResourceLimit()) {
             MinerFull miner = MinerFull.createMinerFull(super.getId(), super.getPosition(), super.getImages(),
-                    super.getImageIndex(), getResourceLimit(), super.getActionPeriod(),
-                    super.getAnimationPeriod());
+                    super.getImageIndex(), super.getActionPeriod(), super.getAnimationPeriod(),
+                    getResourceLimit());
 
             world.removeEntity(this);
             scheduler.unscheduleAllEvents(this);

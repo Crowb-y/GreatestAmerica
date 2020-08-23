@@ -11,7 +11,7 @@ public class Midas extends Trump{
 
     }
 
-    public static Midas createMidas(String id, Point pos, List<PImage> images,Point jailPos) {
+    public static Midas createMidas(String id, Point pos, List<PImage> images) {
 
         return new Midas(id, pos, images, 0, 20, 150);
     }
@@ -21,9 +21,9 @@ public class Midas extends Trump{
     public void executeActivity(WorldModel world, ImageStore imageStore,
             EventScheduler scheduler) {
         Optional<Entity> trumpTarget =
-                world.findNearest(super.getPosition(), super.getClass());
+                world.nearestBlob(super.getPosition());
         if (trumpTarget.isPresent() && moveTo(world,
-                trumpTarget.get(), scheduler)) {
+                trumpTarget.get(), scheduler) && super.getTpCoolDown() == 0) {
             Entity target = trumpTarget.get();
             ((MovingEntity)target).setCaptured();
             target.setImages(imageStore.getImageList("gold"));

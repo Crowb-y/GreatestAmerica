@@ -13,7 +13,6 @@ public class Ore extends ActiveEntity {
     @Override
     public void executeActivity(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
         Point pos = super.getPosition();
-
         world.removeEntity(this);
         scheduler.unscheduleAllEvents(this);
 
